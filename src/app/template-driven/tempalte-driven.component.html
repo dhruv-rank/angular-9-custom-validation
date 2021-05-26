@@ -1,0 +1,46 @@
+<div class="col-6">
+    <form #newForm="ngForm" (ngSubmit)="onSubmit(newForm)" [appConfirmPassword]="['password', 'confirmPassword']">
+
+        <div class="form-group m-3">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="form-control" name="username" #usernameField="ngModel" ngModel
+                [ngClass]="{'bd-red':usernameField.touched &&  usernameField.invalid}" appUsernameValidatior>
+            <div *ngIf="usernameField.touched && !usernameField.errors?.emailError && usernameField.invalid"
+                class="text-danger"> Username is not valid </div>
+        </div>
+
+        <div class="form-group m-3">
+            <label for="email">Email</label>
+            <input type="text" class="form-control my-2"
+                [ngClass]="{'bd-red':emailField.touched &&  emailField.invalid}" #emailField="ngModel" ngModel
+                name='email' gteNum="20" appEmailValidation>
+            <div *ngIf="emailField.touched && emailField.errors?.emailError" class="text-danger">Email must end with
+                'yahoo.com'
+            </div>
+            <div *ngIf="emailField.touched && !emailField.errors?.emailError && emailField.invalid" class="text-danger">
+                Email is not valid
+            </div>
+        </div>
+
+        <div class="form-group m-3">
+            <label for="password">Password</label>
+            <input type="password" class="form-control my-2" name="password" [(ngModel)]='password'
+                [ngClass]="{'bd-red':pwd.touched &&  pwd.invalid}" required #pwd="ngModel">
+            <div *ngIf="pwd.touched && pwd.errors?.required" class="text-danger">
+                password is required
+            </div>
+        </div>
+
+        <div class="form-group m-3">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control my-2" [(ngModel)]='confirmPassword' name="confirmPassword"
+                [ngClass]="{'bd-red':confirmPwd.touched &&  confirmPwd.invalid}" #confirmPwd="ngModel">
+            <div *ngIf="confirmPwd.touched && confirmPwd.invalid" class="text-danger">
+                Confirm Password does not match
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary m-3">Submit</button>
+
+    </form>
+</div>

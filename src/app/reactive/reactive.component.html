@@ -1,0 +1,60 @@
+<div class="container">
+
+    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group m-3">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="form-control" formControlName="username"
+                [ngClass]="{'border border-danger': formSubmitted && reactiveForm.controls.username.errors }">
+            <div *ngIf="reactiveForm.controls.username.errors">
+                <span class="text-danger" *ngIf="formSubmitted  && reactiveForm.controls.username.errors.required ">
+                    Username is reuired</span>
+                <span class="text-danger"
+                    *ngIf="formSubmitted && !reactiveForm.controls.username.valid &&  reactiveForm.controls.username.errors.usernameError ">
+                    Username Must not be mximillian </span>
+                <span class="text-danger"
+                    *ngIf="formSubmitted && !reactiveForm.controls.username.valid &&  !reactiveForm.controls.username.errors.required && !reactiveForm.controls.username.errors.usernameError ">
+                    Username is not valid</span>
+            </div>
+        </div>
+
+        <div class="form-group m-3">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="form-control" formControlName="email"
+                [ngClass]="{'border border-danger': formSubmitted && reactiveForm.controls.email.errors }">
+            <div *ngIf="reactiveForm.controls.email.errors">
+                <span class="text-danger" *ngIf="formSubmitted && reactiveForm.controls.email.errors.required">Email is
+                    required</span>
+                <span class="text-danger"
+                    *ngIf="formSubmitted && reactiveForm.controls.email.errors && !reactiveForm.controls.email.errors.required">Email
+                    is not valid</span>
+            </div>
+        </div>
+
+
+        <div class="form-group m-3">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" formControlName="password"
+                [ngClass]="{'border border-danger': formSubmitted && reactiveForm.controls.password.errors }">
+            <div *ngIf="reactiveForm.controls.password.errors">
+                <span class="text-danger"
+                    *ngIf="formSubmitted && reactiveForm.controls.password.errors.required">Password
+                    is required</span>
+                <span class="text-danger"
+                    *ngIf="formSubmitted && reactiveForm.controls.password.errors.minlength">Password
+                    length is not
+                    valid</span>
+            </div>
+        </div>
+
+        <div class="form-group m-3">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword"
+                [ngClass]="{'border border-danger': formSubmitted && reactiveForm.controls.confirmPassword.errors }">
+            <div *ngIf="reactiveForm.controls.confirmPassword.errors"> Confirm password does not match </div>
+        </div>
+
+        <button type="submit">submit</button>
+
+    </form>
+</div>
